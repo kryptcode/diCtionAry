@@ -1,6 +1,6 @@
 import { atom } from "recoil"
 
-export const searchState = atom({
-    key: 'searchState',
-    default: ''
+export const darkModeState = atom({
+    key: 'darkModeState',
+    default: false
 })

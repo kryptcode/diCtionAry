@@ -3,10 +3,14 @@ import { useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import Header from '../components/Header'
+import { useRecoilValue } from 'recoil'
+import { darkModeState } from '../atom'
 
 export default function Home() {
   const [word, setWord] = useState('')
   const [searchRes, setSearchRes] = useState(null)
+
+  const darkMode = useRecoilValue(darkModeState)
 
 
   const handleSubmit = async (e) => {
@@ -23,7 +27,7 @@ export default function Home() {
   }
 
   return (
-    <div className=''>
+    <div className={`${darkMode ? 'bg-gray-900 text-gray-300' : 'bg-white'} pb-24 min-h-screen`}>
           <Head>
             <title>
               Dictionary | Home
@@ -42,7 +46,7 @@ export default function Home() {
 
             {
               searchRes && searchRes.slice(0, 3).map((item, index) => (
-                <div key={index} className='w-[90%] md:w-[70%] mx-auto mb-8' >
+                <div key={index} className={`  w-[90%] md:w-[70%] mx-auto mb-24`} >
                   <div className='flex items-center justify-between mb-5'>
                     <div>
                         <h2 className='text-6xl mb-2 font-bold'>
@@ -60,17 +64,17 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className='my-3 font-semibold italic text-xl'>
+                    <p className='my-3 font-semibold italic text-xl md:text-2xl'>
                       {item.meanings[0].partOfSpeech}
                     </p>
 
-                    <p className='text-gray-500 mb-3 text-lg'>
+                    <p className='text-gray-500 mb-3 text-xl'>
                       Meaning
                     </p>
 
                     <ul className='list-disc pl-10 mb-5'>
                         {item.meanings[0].definitions.slice(0, 6).map(xo => (
-                          <li className='my-3 text-lg'>
+                          <li className='my-3 text-2xl'>
                             {xo.definition}
                           </li>
                         ) )
